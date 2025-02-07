@@ -3,7 +3,7 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
-  background-color: #000;
+  background-color: #f0f0f0;  /* Light gray background for contrast */
   height: 100%;
   width: 100%;
 }
@@ -13,42 +13,40 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   padding: 20px;
 }
 
-/* Card styling – Black-themed, Apple-inspired design */
+/* Card styling */
 .card {
-  background-color: #1C1C1E;
-  border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 15px;
   width: 100%;
   max-width: 400px;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   position: relative;
-  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Card header with constant title */
+/* Card header styling: black with white letters, rounded top corners */
 .card-header {
   background-color: #000;
-  text-align: center;
+  color: #fff;
   padding: 20px;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #C77DFF;  /* Accent color */
-  border-bottom: 1px solid #333;
-}
-
-/* Card body & step title */
-.card-body {
-  flex: 1;
-  padding: 20px;
   text-align: center;
 }
 
+/* Card body styling */
+.card-body {
+  padding: 20px;
+  text-align: center;
+  color: #000; /* Dark text for visibility */
+}
+
+/* Step title */
 .step-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -69,23 +67,24 @@ body, html {
   font-size: 1rem;
 }
 
-/* Style checkboxes – modern browsers support accent-color */
+/* Checkbox styling */
 .checkbox-label input {
   margin-right: 8px;
   width: 18px;
   height: 18px;
-  accent-color: #4CC9F0;
+  /* Default appearance should be visible on white background */
 }
 
-/* Card footer with navigation buttons */
+/* Card footer styling: visible border at the top */
 .card-footer {
+  padding: 20px;
+  border-top: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  background-color: #000;
-  border-top: 1px solid #333;
+  background-color: #fff;
 }
 
+/* Button styling (unchanged) */
 .card-footer button {
   background-color: #4CC9F0;
   border: none;
@@ -98,18 +97,12 @@ body, html {
 }
 
 .card-footer button:disabled {
-  background-color: #555;
+  background-color: #aaa;
   cursor: not-allowed;
 }
 
 .card-footer button:hover:not(:disabled) {
   background-color: #3aa8d8;
-}
-
-/* Final result text styling */
-.final-result {
-  font-size: 1.8rem;
-  font-weight: 700;
 }
 
 /* Animations for sliding transitions */
