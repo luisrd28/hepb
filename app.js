@@ -36,7 +36,7 @@ const steps = {
 };
 
 function App() {
-  // history stores past decisions so that going back clears later selections.
+  // History stores past decisions so that going back clears later selections.
   const [history, setHistory] = useState([]); // each item: { stepKey, selection }
   const [currentStepKey, setCurrentStepKey] = useState("step1");
   const [currentSelection, setCurrentSelection] = useState(null);
@@ -45,14 +45,15 @@ function App() {
   // transitionDirection determines whether the new card slides in from the right (“next”) or left (“back”)
   const [transitionDirection, setTransitionDirection] = useState("next");
 
-  // When the user clicks one of the toggle options.
+  // When the user clicks one of the checkbox options.
   const handleSelection = (selection) => {
+    // Since we want mutually exclusive checkboxes, simply set the selection.
     setCurrentSelection(selection);
   };
 
   // When the user clicks “Next”
   const handleNext = () => {
-    if (!currentSelection) return; // safeguard; the button is disabled until selection
+    if (!currentSelection) return; // safeguard; button is disabled until selection is made
     const currentNode = steps[currentStepKey];
     const outcome = currentNode[currentSelection];
     if (outcome.result) {
@@ -134,7 +135,7 @@ function App() {
   );
 }
 
-// The decision card shows the current step (e.g. “HBsAg”) plus the two toggles.
+// The decision card shows the current step (e.g. “HBsAg”) with two checkboxes.
 function DecisionCard({ stepName, currentSelection, onSelection, onNext, onBack, disableBack, transitionDirection }) {
   return (
     <div className={`card ${transitionDirection === "next" ? "slide-in-right" : "slide-in-left"}`}>
@@ -143,17 +144,25 @@ function DecisionCard({ stepName, currentSelection, onSelection, onNext, onBack,
       </div>
       <div className="card-body">
         <div className="step-title">{stepName}</div>
-        <div className="toggle-container">
-          <Toggle 
-            label="Positive" 
-            isSelected={currentSelection === "positive"} 
-            onClick={() => onSelection("positive")}
-          />
-          <Toggle 
-            label="Negative" 
-            isSelected={currentSelection === "negative"} 
-            onClick={() => onSelection("negative")}
-          />
+        <div className="checkbox-container">
+          <label className="checkbox-label">
+            <input 
+              type="checkbox" 
+              checked={currentSelection === "positive"} 
+              onChange={() => onSelection("positive")}
+              name="serology" 
+            />
+            Positive
+          </label>
+          <label className="checkbox-label">
+            <input 
+              type="checkbox" 
+              checked={currentSelection === "negative"} 
+              onChange={() => onSelection("negative")}
+              name="serology" 
+            />
+            Negative
+          </label>
         </div>
       </div>
       <div className="card-footer">
@@ -178,16 +187,6 @@ function FinalCard({ result, onBack, onReset, transitionDirection }) {
         <button onClick={onBack}>Back</button>
         <button onClick={onReset}>Reset</button>
       </div>
-    </div>
-  );
-}
-
-// A custom toggle component representing one on/off switch.
-function Toggle({ label, isSelected, onClick }) {
-  return (
-    <div className="toggle" onClick={onClick}>
-      <div className={`toggle-switch ${isSelected ? "on" : "off"}`}></div>
-      <span className="toggle-label">{label}</span>
     </div>
   );
 }
