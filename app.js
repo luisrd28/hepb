@@ -192,3 +192,4 @@ function FinalCard({ result, onBack, onReset, transitionDirection }) {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
